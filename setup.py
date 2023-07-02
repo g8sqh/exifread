@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import exifread
 
 readme_file = open("README.rst", "rt").read()
 
