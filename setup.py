@@ -5,6 +5,7 @@ readme_file = open("README.rst", "rt").read()
 dev_requirements = [
     "mypy==1.2.0",
     "pylint==2.14.4",
+    "rdflib",
 ]
 
 setup(
@@ -17,7 +18,7 @@ setup(
     url="https://github.com/ianare/exif-py",
     license="BSD",
     keywords="exif image metadata photo",
-    description=" ".join(exifread.__doc__.splitlines()).strip(),
+    #description=" ".join(exifread.__doc__.splitlines()).strip(),
     long_description=readme_file,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
