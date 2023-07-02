@@ -9,7 +9,7 @@ dev_requirements = [
 
 setup(
     name="ExifRead",
-    version=exifread.__version__,
+    #version=exifread.__version__,
     author="Ianaré Sévi",
     author_email="ianare@gmail.com",
     packages=find_packages(),
