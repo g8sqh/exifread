@@ -39,4 +39,5 @@ setup(
     extras_require={
         "dev": dev_requirements,
     },
+    install_requires=['rdflib',]
 )
