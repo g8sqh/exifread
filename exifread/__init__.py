@@ -204,9 +204,9 @@ def process_file(fh: BinaryIO, stop_tag=DEFAULT_STOP_TAG,
             #print(f"RDF\n{g=}")
             for stmt in g:
                 #pprint(stmt)
-                _, key, val = stmt
-                key=str(key).rsplit('/', maxsplit=1)[1]
-                val = str(val)
+                _, k, v = stmt  # can't reuse variable says github...
+                key=str(k).rsplit('/', maxsplit=1)[1]
+                val = str(v)
                 print(f"{key=} = {val}")
                 hdr.tags[f"XMP {key}"] = val
     return hdr.tags
