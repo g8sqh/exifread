@@ -115,7 +115,8 @@ def main(args) -> None:
         for i in tag_keys:
             try:
                 logger.info('%s (%s): %s', i, FIELD_TYPES[data[i].field_type][2], data[i].printable)
-            except:
+            except Exception as e:
+                #print(f"{e=}")
                 logger.error("%s : %s", i, str(data[i]))
 
         file_stop = timeit.default_timer()

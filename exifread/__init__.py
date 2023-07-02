@@ -12,6 +12,8 @@ from exifread.utils import ord_, make_string
 from exifread.heic import HEICExifFinder
 from exifread.jpeg import find_jpeg_exif
 from exifread.exceptions import InvalidExif, ExifNotFound
+from rdflib import Graph
+from pprint import pprint
 
 __version__ = '3.1.0'
 
@@ -184,7 +186,7 @@ def process_file(fh: BinaryIO, stop_tag=DEFAULT_STOP_TAG,
         hdr.extract_jpeg_thumbnail()
 
     # parse XMP tags (experimental)
-    if debug and details:
+    if (debug or True) and details:
         # Easy we already have them
         xmp_tag = hdr.tags.get('Image ApplicationNotes')
         if xmp_tag:
@@ -194,5 +196,17 @@ def process_file(fh: BinaryIO, stop_tag=DEFAULT_STOP_TAG,
         else:
             xmp_bytes = _get_xmp(fh)
         if xmp_bytes:
-            hdr.parse_xmp(xmp_bytes)
+            logger.debug("Try for RDF read")
+            lines = hdr.parse_xmp(xmp_bytes)
+            #print(f"{lines=}")
+            g = Graph()
+            g.parse(data='\n'.join(lines[2:-1]), format='xml')
+            #print(f"RDF\n{g=}")
+            for stmt in g:
+                #pprint(stmt)
+                _, key, val = stmt
+                key=str(key).rsplit('/', maxsplit=1)[1]
+                val = str(val)
+                print(f"{key=} = {val}")
+                hdr.tags[f"XMP {key}"] = val
     return hdr.tags

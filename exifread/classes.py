@@ -618,3 +618,4 @@ class ExifHeader:
             if line.strip():
                 cleaned.append(line)
         self.tags['Image ApplicationNotes'] = IfdTag('\n'.join(cleaned), 0, 1, xmp_bytes, 0, 0)
+        return cleaned
